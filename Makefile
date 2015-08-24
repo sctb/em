@@ -1,7 +1,6 @@
 # (Common) compile-time options:
 #
 #	FKEYS		-- add support for function key sequences.
-#	STARTUPFILE		-- look for and handle initialization file.
 #	XKEYS		-- use termcap function key definitions.
 #				note: XKEYS and bsmap mode do _not_ get along.
 #
