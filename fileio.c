@@ -314,38 +314,6 @@ adjustname(const char *fn, int slashslash)
 	return (fnb);
 }
 
-/*
- * Find a startup file for the user and return its name. As a service
- * to other pieces of code that may want to find a startup file (like
- * the terminal driver in particular), accepts a suffix to be appended
- * to the startup file name.
- */
-char *
-startupfile(char *suffix)
-{
-	static char	 file[NFILEN];
-	char		*home;
-	int		 ret;
-
-	if ((home = getenv("HOME")) == NULL || *home == '\0')
-		goto nohome;
-
-	if (suffix == NULL) {
-		ret = snprintf(file, sizeof(file), _PATH_MG_STARTUP, home);
-		if (ret < 0 || ret >= sizeof(file))
-			return (NULL);
-	} else {
-		ret = snprintf(file, sizeof(file), _PATH_MG_TERM, home, suffix);
-		if (ret < 0 || ret >= sizeof(file))
-			return (NULL);
-	}
-
-	if (access(file, R_OK) == 0)
-		return (file);
-nohome:
-	return (NULL);
-}
-
 int
 copy(char *frname, char *toname)
 {

@@ -86,22 +86,6 @@ main(int argc, char **argv)
 	 */
 	update(CMODE);
 
-	/* user startup file. */
-	if ((cp = startupfile(NULL)) != NULL)
-		(void)load(cp);
-
-	/* 
-	 * Now ensure any default buffer modes from the startup file are
-	 * given to any files opened when parsing the startup file.
-	 * Note *scratch* will also be updated.
-	 */
-	for (bp = bheadp; bp != NULL; bp = bp->b_bufp) {
-		bp->b_flag = defb_flag;
-		for (i = 0; i <= defb_nmodes; i++) {
-                	bp->b_modes[i] = defb_modes[i];
-        	}
-	}
-
 	/* Force FFOTHARG=1 so that this mode is enabled, not simply toggled */
 	if (init_fcn)
 		init_fcn(FFOTHARG, 1);

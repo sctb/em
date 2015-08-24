@@ -453,7 +453,6 @@ int		 ffputbuf(FILE *, struct buffer *);
 int		 ffgetline(FILE *, char *, int, int *);
 int		 fbackupfile(const char *);
 char		*adjustname(const char *, int);
-char		*startupfile(char *);
 int		 copy(char *, char *);
 struct list	*make_file_list(char *);
 int		 fisdir(const char *);

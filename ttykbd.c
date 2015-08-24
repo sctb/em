@@ -24,15 +24,11 @@ char	*keystrings[] = {NULL};
 #endif /* FKEYS */
 
 /*
- * Turn on function keys using keypad_xmit, then load a keys file, if
- * available.  The keys file is located in the same manner as the startup
- * file is, depending on what startupfile() does on your system.
+ * Turn on function keys
  */
 void
 ttykeymapinit(void)
 {
-	char	*cp;
-
 #ifdef FKEYS
 	/* Bind keypad function keys. */
 	if (key_left)
@@ -57,10 +53,6 @@ ttykeymapinit(void)
 		dobindkey(fundamental_map, "delete-char", key_dc);
 #endif /* FKEYS */
 
-	if ((cp = getenv("TERM"))) {
-		if (((cp = startupfile(cp)) != NULL) && (load(cp) != TRUE))
-			ewprintf("Error reading key initialization file");
-	}
 	if (keypad_xmit)
 		/* turn on keypad */
 		putpad(keypad_xmit, 1);
