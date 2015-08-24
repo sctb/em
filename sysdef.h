@@ -1,5 +1,3 @@
-/*	$OpenBSD: sysdef.h,v 1.19 2014/11/16 04:16:41 guenther Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

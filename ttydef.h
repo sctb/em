@@ -1,5 +1,3 @@
-/*	$OpenBSD: ttydef.h,v 1.10 2005/11/20 03:53:45 deraadt Exp $	*/
-
 /* This file is in the public domain. */
 
 #ifndef TTYDEF_H

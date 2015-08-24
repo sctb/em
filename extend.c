@@ -1,5 +1,3 @@
-/*	$OpenBSD: extend.c,v 1.58 2014/12/06 23:20:17 krw Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

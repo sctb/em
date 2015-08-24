@@ -1,5 +1,3 @@
-/*	$OpenBSD: basic.c,v 1.43 2014/11/16 04:16:41 guenther Exp $	*/
-
 /* This file is in the public domain */
 
 /*

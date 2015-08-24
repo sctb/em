@@ -1,5 +1,3 @@
-/*	$OpenBSD: macro.c,v 1.15 2014/03/20 07:47:29 lum Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

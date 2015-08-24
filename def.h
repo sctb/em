@@ -1,5 +1,3 @@
-/*	$OpenBSD: def.h,v 1.141 2014/04/03 20:17:12 lum Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

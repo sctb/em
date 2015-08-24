@@ -1,4 +1,3 @@
-/* $OpenBSD: undo.c,v 1.55 2014/03/20 07:47:29 lum Exp $ */
 /*
  * This file is in the public domain
  */

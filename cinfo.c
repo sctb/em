@@ -1,5 +1,3 @@
-/*	$OpenBSD: cinfo.c,v 1.16 2011/11/28 04:41:39 lum Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

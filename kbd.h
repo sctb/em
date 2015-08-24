@@ -1,5 +1,3 @@
-/*	$OpenBSD: kbd.h,v 1.18 2006/07/27 19:59:29 deraadt Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

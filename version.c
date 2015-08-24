@@ -1,5 +1,3 @@
-/*	$OpenBSD: version.c,v 1.9 2005/06/14 18:14:40 kjell Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

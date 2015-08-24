@@ -1,5 +1,3 @@
-/*	$OpenBSD: match.c,v 1.17 2013/05/31 18:03:44 lum Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

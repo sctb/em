@@ -1,5 +1,3 @@
-/*	$OpenBSD: buffer.c,v 1.94 2014/06/12 16:29:41 bcallah Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

@@ -1,5 +1,3 @@
-/*	$OpenBSD: ttykbd.c,v 1.16 2012/04/12 04:47:59 lum Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

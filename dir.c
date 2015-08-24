@@ -1,5 +1,3 @@
-/*	$OpenBSD: dir.c,v 1.27 2014/04/03 20:17:12 lum Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

@@ -1,5 +1,3 @@
-/*	$OpenBSD: random.c,v 1.33 2014/03/26 22:02:06 lum Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

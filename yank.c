@@ -1,5 +1,3 @@
-/*	$OpenBSD: yank.c,v 1.11 2014/03/20 07:47:29 lum Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

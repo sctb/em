@@ -1,5 +1,3 @@
-/*	$OpenBSD: spawn.c,v 1.11 2006/08/01 22:16:03 jason Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

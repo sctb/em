@@ -1,5 +1,3 @@
-/*	$OpenBSD: tty.c,v 1.32 2014/11/16 00:50:00 guenther Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

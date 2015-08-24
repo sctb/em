@@ -1,5 +1,3 @@
-/*	$OpenBSD: display.c,v 1.44 2015/02/17 00:34:33 tedu Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

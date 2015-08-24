@@ -1,5 +1,3 @@
-/*	$OpenBSD: paragraph.c,v 1.35 2014/11/16 04:16:41 guenther Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

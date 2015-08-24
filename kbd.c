@@ -1,5 +1,3 @@
-/*	$OpenBSD: kbd.c,v 1.26 2013/05/31 18:03:44 lum Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

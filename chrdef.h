@@ -1,5 +1,3 @@
-/*	$OpenBSD: chrdef.h,v 1.7 2005/06/14 18:14:40 kjell Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

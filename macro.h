@@ -1,5 +1,3 @@
-/*	$OpenBSD: macro.h,v 1.7 2005/11/18 20:56:53 deraadt Exp $	*/
-
 /* This file is in the public domain. */
 
 /* definitions for keyboard macros */

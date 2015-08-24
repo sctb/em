@@ -1,5 +1,3 @@
-/*	$OpenBSD: window.c,v 1.31 2014/05/28 07:59:36 florian Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

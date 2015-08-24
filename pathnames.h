@@ -1,5 +1,3 @@
-/*	$OpenBSD: pathnames.h,v 1.1 2012/06/18 07:14:55 jasper Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

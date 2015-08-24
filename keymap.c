@@ -1,5 +1,3 @@
-/*	$OpenBSD: keymap.c,v 1.52 2014/08/14 12:22:58 bcallah Exp $	*/
-
 /* This file is in the public domain. */
 
 /*

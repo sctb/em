@@ -1,5 +1,3 @@
-/*	$OpenBSD: funmap.c,v 1.47 2013/05/31 18:03:44 lum Exp $	*/
-
 /* This file is in the public domain */
 
 #include "def.h"
