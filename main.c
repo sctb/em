@@ -31,7 +31,6 @@ static void	 edinit(struct buffer *);
 static __dead void usage(void);
 
 extern char	*__progname;
-extern void     closetags(void);
 
 static __dead void
 usage()
@@ -71,22 +70,6 @@ main(int argc, char **argv)
 
 	maps_init();		/* Keymaps and modes.		*/
 	funmap_init();		/* Functions.			*/
-
-	/*
-	 * This is where we initialize standalone extensions that should
-	 * be loaded dynamically sometime in the future.
-	 */
-	{
-		extern void grep_init(void);
-		extern void theo_init(void);
-		extern void cmode_init(void);
-		extern void dired_init(void);
-
-		dired_init();
-		grep_init();
-		theo_init();
-		cmode_init();
-	}
 
 	if (init_fcn_name &&
 	    (init_fcn = name_function(init_fcn_name)) == NULL)
@@ -130,10 +113,10 @@ main(int argc, char **argv)
 
 	for (nfiles = 0, i = 0; i < argc; i++) {
 		if (argv[i][0] == '+' && strlen(argv[i]) >= 2) {
-			long long lval;
-			const char *errstr;
+			long lval;
+			char *errstr;
 
-			lval = strtonum(&argv[i][1], INT_MIN, INT_MAX, &errstr);
+			lval = strtol(&argv[i][1], &errstr, 0);
 			if (argv[i][1] == '\0' || errstr != NULL)
 				goto notnum;
 			startrow = lval;
@@ -235,7 +218,6 @@ quit(int f, int n)
 	if (s == FALSE
 	    || eyesno("Modified buffers exist; really exit") == TRUE) {
 		vttidy();
-		closetags();
 		exit(0);
 	}
 	return (TRUE);

@@ -513,7 +513,7 @@ int
 gotoline(int f, int n)
 {
 	char   buf[32], *bufp;
-	const char *err;
+	char   *err;
 
 	if (!(f & FFARG)) {
 		if ((bufp = eread("Goto line: ", buf, sizeof(buf),
@@ -521,7 +521,7 @@ gotoline(int f, int n)
 			return (ABORT);
 		if (bufp[0] == '\0')
 			return (ABORT);
-		n = (int)strtonum(buf, INT_MIN, INT_MAX, &err);
+		n = (int)strtol(buf, &err, 0);
 		if (err) {
 			dobeep();
 			ewprintf("Line number %s", err);

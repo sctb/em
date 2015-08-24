@@ -181,8 +181,7 @@ readin(char *fname)
 {
 	struct mgwin	*wp;
 	struct stat	 statbuf;
-	int	 status, i, ro = FALSE;
-	PF	*ael;
+	int	 status, ro = FALSE;
 	char	 dp[NFILEN];
 
 	/* might be old */
@@ -203,15 +202,6 @@ readin(char *fname)
 			wp->w_markp = NULL;
 			wp->w_marko = 0;
 		}
-	}
-
-	/*
-	 * Call auto-executing function if we need to.
-	 */
-	if ((ael = find_autoexec(fname)) != NULL) {
-		for (i = 0; ael[i] != NULL; i++)
-			(*ael[i])(0, 1);
-		free(ael);
 	}
 
 	/* no change */
@@ -263,14 +253,14 @@ readin(char *fname)
  */
 
 /*
- * Insert a file in the current buffer, after dot. If file is a directory,
- * and 'replacebuf' is TRUE, invoke dired mode, else die with an error.
- * If file is a regular file, set mark at the end of the text inserted;
- * point at the beginning.  Return a standard status. Print a summary
- * (lines read, error message) out as well. This routine also does the
- * read end of backup processing.  The BFBAK flag, if set in a buffer,
- * says that a backup should be taken.  It is set when a file is read in,
- * but not on a new file. You don't need to make a backup copy of nothing.
+ * Insert a file in the current buffer, after dot. If file is a
+ * regular file, set mark at the end of the text inserted; point at
+ * the beginning.  Return a standard status. Print a summary (lines
+ * read, error message) out as well. This routine also does the read
+ * end of backup processing.  The BFBAK flag, if set in a buffer, says
+ * that a backup should be taken.  It is set when a file is read in,
+ * but not on a new file. You don't need to make a backup copy of
+ * nothing.
  */
 
 static char	*line = NULL;
@@ -322,19 +312,10 @@ insertfile(char *fname, char *newname, int replacebuf)
 		goto out;
 	} else if (s == FIODIR) {
 		/* file was a directory */
-		if (replacebuf == FALSE) {
-			dobeep();
-			ewprintf("Cannot insert: file is a directory, %s",
-			    fname);
-			goto cleanup;
-		}
-		killbuffer(bp);
-		bp = dired_(fname);
-		undo_enable(FFRAND, x);
-		if (bp == NULL)
-			return (FALSE);
-		curbp = bp;
-		return (showbuffer(bp, curwp, WFFULL | WFMODE));
+		dobeep();
+		ewprintf("Cannot insert: file is a directory, %s",
+		    fname);
+		goto cleanup;
 	} else {
 		(void)xdirname(bp->b_cwd, fname, sizeof(bp->b_cwd));
 		(void)strlcat(bp->b_cwd, "/", sizeof(bp->b_cwd));

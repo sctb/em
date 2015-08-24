@@ -21,9 +21,6 @@ static struct buffer *bnew(const char *);
 
 static int usebufname(const char *);
 
-/* Flag for global working dir */
-extern int globalwd;
-
 /* ARGSUSED */
 int
 togglereadonly(int f, int n)
@@ -834,7 +831,7 @@ getbufcwd(char *path, size_t plen)
 	if (plen == 0)
 		return (FALSE);
 
-	if (globalwd == FALSE && curbp->b_cwd[0] != '\0') {
+	if (curbp->b_cwd[0] != '\0') {
 		(void)strlcpy(path, curbp->b_cwd, plen);
 	} else {
 		if (getcwdir(cwd, sizeof(cwd)) == FALSE)

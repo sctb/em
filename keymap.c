@@ -39,56 +39,6 @@ struct KEYMAPE (2 + IMAPEXT) helpmap = {
 	}
 };
 
-static PF cCsc[] = {
-	cscallerfuncs,		/* c */
-	csdefinition,		/* d */
-	csegrep,		/* e */
-	csfindfile,		/* f */
-	rescan,			/* g */
-	rescan,			/* h */
-	csfindinc,		/* i */
-	rescan,			/* j */
-	rescan,			/* k */
-	rescan,			/* l */
-	rescan,			/* m */
-	csnextmatch,		/* n */
-	rescan,			/* o */
-	csprevmatch,		/* p */
-	rescan,			/* q */
-	rescan, 		/* r */	
-	cssymbol,		/* s */
-	csfindtext		/* t */
-};
-
-static struct KEYMAPE (1 + IMAPEXT) cCsmap = {
-	1,
-	1 + IMAPEXT,
-	rescan,
-	{
-		{
-			'c', 't', cCsc, NULL
-		}
-	}
-};
-
-static PF cCs[] = {
-	NULL			/* s */
-};
-
-struct KEYMAPE (2 + IMAPEXT) ccmap = {
-	2,
-	2 + IMAPEXT,
-	rescan,
-	{
-		{
-			CCHR('@'), CCHR('@'), (PF[]){ rescan }, NULL
-		},
-		{
-			's', 's', cCs, (KEYMAP *) & cCsmap
-		}
-	}
-};
-
 static PF cX4cF[] = {
 	poptofile,		/* ^f */
 	ctrlg			/* ^g */
@@ -159,7 +109,7 @@ static PF cXeq[] = {
 static PF cXcar[] = {
 	enlargewind,		/* ^ */
 	rescan,			/* _ */
-	next_error,		/* ` */
+	rescan, 		/* ` */
 	rescan,			/* a */
 	usebuffer,		/* b */
 	rescan,			/* c */
@@ -227,11 +177,11 @@ static PF metapct[] = {
 };
 
 static PF metami[] = {
-	poptag,                 /* * */
+	rescan,                 /* * */
 	rescan,                 /* + */
 	rescan,                 /* , */
 	negative_argument,	/* - */
-	findtag,		/* . */
+	rescan, 		/* . */
 	rescan,			/* / */
 	digit_argument,		/* 0 */
 	digit_argument,		/* 1 */
@@ -401,7 +351,7 @@ static struct KEYMAPE (8 + NFUND_XMAPS + IMAPEXT) fundmap = {
 	selfinsert,
 	{
 		{
-			CCHR('@'), CCHR('G'), fund_at, (KEYMAP *) & ccmap
+			CCHR('@'), CCHR('G'), fund_at, NULL
 		},
 		{
 			CCHR('H'), CCHR('H'), fund_h, (KEYMAP *) & helpmap

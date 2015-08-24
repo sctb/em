@@ -107,6 +107,15 @@ typedef int	(*PF)(int, int);	/* generally useful type */
 
 #define MAX_TOKEN 64
 
+/* Compatibility */
+#ifndef LOGIN_NAME_MAX
+#define LOGIN_NAME_MAX _POSIX_LOGIN_NAME_MAX
+#endif
+
+#ifndef MSG_NOSIGNAL
+#define MSG_NOSIGNAL 0
+#endif
+
 /*
  * This structure holds the starting position
  * (as a line/offset pair) and the number of characters in a
@@ -339,9 +348,6 @@ int		 makedir(int, int);
 int		 do_makedir(char *);
 int		 ask_makedir(void);
 
-/* dired.c */
-struct buffer	*dired_(char *);
-
 /* file.c X */
 int		 fileinsert(int, int);
 int		 filevisit(int, int);
@@ -524,27 +530,6 @@ int		 space_to_tabstop(int, int);
 int		 backtoindent(int, int);
 int		 joinline(int, int);
 
-/* tags.c X */
-int		 findtag(int, int);
-int 		 poptag(int, int);
-int		 tagsvisit(int, int);
-int		 curtoken(int, int, char *);
-
-/* cscope.c */
-int		cssymbol(int, int);
-int		csdefinition(int, int);
-int		csfuncalled(int, int);
-int		cscallerfuncs(int, int);
-int		csfindtext(int, int);
-int		csegrep(int, int);
-int		csfindfile(int, int);
-int		csfindinc(int, int);
-int		csnextfile(int, int);
-int		csnextmatch(int, int);
-int		csprevfile(int, int);
-int		csprevmatch(int, int);
-int		cscreatelist(int, int);
-
 /* extend.c X */
 int		 insert(int, int);
 int		 bindtokey(int, int);
@@ -664,29 +649,14 @@ int		 undo_boundary_enable(int, int);
 int		 undo_add_change(struct line *, int, int);
 int		 undo(int, int);
 
-/* autoexec.c X */
-int		 auto_execute(int, int);
-PF		*find_autoexec(const char *);
-int		 add_autoexec(const char *, const char *);
-
-/* cmode.c X */
-int		 cmode(int, int);
-int		 cc_brace(int, int);
-int		 cc_char(int, int);
-int		 cc_tab(int, int);
-int		 cc_indent(int, int);
-int		 cc_lfindent(int, int);
-
-/* grep.c X */
-int		 next_error(int, int);
-int		 globalwdtoggle(int, int);
-int		 compile(int, int);
-
 /* bell.c */
 void		 bellinit(void);
 int		 toggleaudiblebell(int, int);
 int		 togglevisiblebell(int, int);
 void		 dobeep(void);
+
+/* reallocarray.c */
+void            *reallocarray(void *optr, size_t nmemb, size_t size);
 
 /*
  * Externals.
