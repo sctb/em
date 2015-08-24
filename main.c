@@ -44,14 +44,10 @@ main(int argc, char **argv)
 	char		*cp, *init_fcn_name = NULL;
 	PF		 init_fcn = NULL;
 	int	 	 o, i, nfiles;
-	int	  	 nobackups = 0;
 	struct buffer	*bp = NULL;
 
-	while ((o = getopt(argc, argv, "nf:")) != -1)
+	while ((o = getopt(argc, argv, "f:")) != -1)
 		switch (o) {
-		case 'n':
-			nobackups = 1;
-			break;
 		case 'f':
 			if (init_fcn_name != NULL)
 				errx(1, "cannot specify more than one "
@@ -89,9 +85,6 @@ main(int argc, char **argv)
 	/* Force FFOTHARG=1 so that this mode is enabled, not simply toggled */
 	if (init_fcn)
 		init_fcn(FFOTHARG, 1);
-
-	if (nobackups)
-		makebkfile(FFARG, 0);
 
 	for (nfiles = 0, i = 0; i < argc; i++) {
 		if (argv[i][0] == '+' && strlen(argv[i]) >= 2) {

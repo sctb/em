@@ -254,11 +254,7 @@ readin(char *fname)
  * Insert a file in the current buffer, after dot. If file is a
  * regular file, set mark at the end of the text inserted; point at
  * the beginning.  Return a standard status. Print a summary (lines
- * read, error message) out as well. This routine also does the read
- * end of backup processing.  The BFBAK flag, if set in a buffer, says
- * that a backup should be taken.  It is set when a file is read in,
- * but not on a new file. You don't need to make a backup copy of
- * nothing.
+ * read, error message) out as well.
  */
 
 static char	*line = NULL;
@@ -419,10 +415,7 @@ endoffile:
 	curwp->w_dotline = oline;
 	if (olp == curbp->b_headp)
 		curwp->w_dotp = lforw(olp);
-	if (newname != NULL)
-		bp->b_flag |= BFCHG | BFBAK;	/* Need a backup.	 */
-	else
-		bp->b_flag |= BFCHG;
+	bp->b_flag |= BFCHG;
 	/*
 	 * If the insert was at the end of buffer, set lp1 to the end of
 	 * buffer line, and lp2 to the beginning of the newly inserted text.
@@ -513,21 +506,13 @@ filewrite(int f, int n)
 		if ((curbp->b_bname = strdup(bn)) == NULL)
 			return (FALSE);
 		(void)fupdstat(curbp);
-		curbp->b_flag &= ~(BFBAK | BFCHG);
+		curbp->b_flag &= ~BFCHG;
 		upmodes(curbp);
 		undo_add_boundary(FFRAND, 1);
 		undo_add_modified();
 	}
 	return (s);
 }
-
-/*
- * Save the contents of the current buffer back into its associated file.
- */
-#ifndef	MAKEBACKUP
-#define	MAKEBACKUP TRUE
-#endif /* !MAKEBACKUP */
-static int	makebackup = MAKEBACKUP;
 
 /* ARGSUSED */
 int
@@ -542,10 +527,7 @@ filesave(int f, int n)
 /*
  * Save the contents of the buffer argument into its associated file.  Do
  * nothing if there have been no changes (is this a bug, or a feature?).
- * Error if there is no remembered file name. If this is the first write
- * since the read or visit, then a backup copy of the file is made.
- * Allow user to select whether or not to make backup files by looking at
- * the value of makebackup.
+ * Error if there is no remembered file name.
  */
 int
 buffsave(struct buffer *bp)
@@ -574,42 +556,14 @@ buffsave(struct buffer *bp)
 			return (s);
 	}
 	
-	if (makebackup && (bp->b_flag & BFBAK)) {
-		s = fbackupfile(bp->b_fname);
-		/* hard error */
-		if (s == ABORT)
-			return (FALSE);
-		/* softer error */
-		if (s == FALSE &&
-		    (s = eyesno("Backup error, save anyway")) != TRUE)
-			return (s);
-	}
 	if ((s = writeout(&ffp, bp, bp->b_fname)) == TRUE) {
 		(void)fupdstat(bp);
-		bp->b_flag &= ~(BFCHG | BFBAK);
+		bp->b_flag &= ~BFCHG;
 		upmodes(bp);
 		undo_add_boundary(FFRAND, 1);
 		undo_add_modified();
 	}
 	return (s);
-}
-
-/*
- * Since we don't have variables (we probably should) this is a command
- * processor for changing the value of the make backup flag.  If no argument
- * is given, sets makebackup to true, so backups are made.  If an argument is
- * given, no backup files are made when saving a new version of a file.
- */
-/* ARGSUSED */
-int
-makebkfile(int f, int n)
-{
-	if (f & FFARG)
-		makebackup = n > 0;
-	else
-		makebackup = !makebackup;
-	ewprintf("Backup files %sabled", makebackup ? "en" : "dis");
-	return (TRUE);
 }
 
 /*

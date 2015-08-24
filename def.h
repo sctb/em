@@ -280,7 +280,6 @@ struct buffer {
 #define blastlp(buf)	(lback((buf)->b_headp))
 
 #define BFCHG	0x01			/* Changed.			 */
-#define BFBAK	0x02			/* Need to make a backup.	 */
 #ifdef	NOTAB
 #define BFNOTAB 0x04			/* no tab mode			 */
 #endif
@@ -357,7 +356,6 @@ int		 insertfile(char *, char *, int);
 int		 filewrite(int, int);
 int		 filesave(int, int);
 int		 buffsave(struct buffer *);
-int		 makebkfile(int, int);
 int		 writeout(FILE **, struct buffer *, char *);
 void		 upmodes(struct buffer *);
 size_t		 xbasename(char *, const char *, size_t);
@@ -451,15 +449,12 @@ int		 ffwopen(FILE **, const char *, struct buffer *);
 int		 ffclose(FILE *, struct buffer *);
 int		 ffputbuf(FILE *, struct buffer *);
 int		 ffgetline(FILE *, char *, int, int *);
-int		 fbackupfile(const char *);
 char		*adjustname(const char *, int);
 int		 copy(char *, char *);
 struct list	*make_file_list(char *);
 int		 fisdir(const char *);
 int		 fchecktime(struct buffer *);
 int		 fupdstat(struct buffer *);
-int		 backuptohomedir(int, int);
-int		 toggleleavetmp(int, int);
 char		*expandtilde(const char *);
 
 /* kbd.c X */
