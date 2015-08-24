@@ -622,8 +622,7 @@ int		 notabmode(int, int);
 int		 overwrite_mode(int, int);
 int		 set_default_mode(int,int);
 
-#ifdef REGEX
-/* re_search.c X */
+/* regex.c X */
 int		 re_forwsearch(int, int);
 int		 re_backsearch(int, int);
 int		 re_searchagain(int, int);
@@ -634,7 +633,6 @@ int		 delmatchlines(int, int);
 int		 delnonmatchlines(int, int);
 int		 cntmatchlines(int, int);
 int		 cntnonmatchlines(int, int);
-#endif	/* REGEX */
 
 /* undo.c X */
 void		 free_undo_record(struct undo_rec *);

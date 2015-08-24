@@ -42,20 +42,16 @@ static struct funmap functnames[] = {
 	{clearmark, "clear-mark",},
 	{colnotoggle, "column-number-mode",},
 	{copyregion, "copy-region-as-kill",},
-#ifdef	REGEX
 	{cntmatchlines, "count-matches",},
 	{cntnonmatchlines, "count-non-matches",},
-#endif /* REGEX */
 	{redefine_key, "define-key",},
 	{backdel, "delete-backward-char",},
 	{deblank, "delete-blank-lines",},
 	{forwdel, "delete-char",},
 	{delwhite, "delete-horizontal-space",},
 	{delleadwhite, "delete-leading-space",},
-#ifdef	REGEX
 	{delmatchlines, "delete-matching-lines",},
 	{delnonmatchlines, "delete-non-matching-lines",},
-#endif /* REGEX */
 	{onlywind, "delete-other-windows",},
 	{deltrailwhite, "delete-trailing-space",},
 	{delwind, "delete-window",},
@@ -129,20 +125,14 @@ static struct funmap functnames[] = {
 	{spawncli, "push-shell",},
 	{showcwdir, "pwd",},
 	{queryrepl, "query-replace",},
-#ifdef REGEX
 	{re_queryrepl, "query-replace-regexp",},
-#endif /* REGEX */
 	{quote, "quoted-insert",},
-#ifdef REGEX
 	{re_searchagain, "re-search-again",},
 	{re_backsearch, "re-search-backward",},
 	{re_forwsearch, "re-search-forward",},
-#endif /* REGEX */
 	{reposition, "recenter",},
 	{redraw, "redraw-display",},
-#ifdef REGEX
 	{replstr, "replace-string",},
-#endif /* REGEX */
 	{revertbuffer, "revert-buffer",},
 	{filesave, "save-buffer",},
 	{quit, "save-buffers-kill-emacs",},
@@ -156,9 +146,7 @@ static struct funmap functnames[] = {
 	{backsearch, "search-backward",},
 	{forwsearch, "search-forward",},
 	{selfinsert, "self-insert-command",},
-#ifdef REGEX
 	{setcasefold, "set-case-fold-search",},
-#endif /* REGEX */
 	{set_default_mode, "set-default-mode",},
 	{setfillcol, "set-fill-column",},
 	{setmark, "set-mark-command",},
