@@ -25,7 +25,6 @@ typedef int	(*PF)(int, int);	/* generally useful type */
 #define NPAT	80		/* Length, pattern.		 */
 #define HUGE	1000		/* A rather large number.	 */
 #define NSRCH	128		/* Undoable search commands.	 */
-#define NXNAME	64		/* Length, extended command.	 */
 #define NKNAME	20		/* Length, key names.		 */
 #define NTIME	50		/* Length, timestamp string.	 */
 /*
@@ -521,20 +520,6 @@ int		 backdel(int, int);
 int		 space_to_tabstop(int, int);
 int		 backtoindent(int, int);
 int		 joinline(int, int);
-
-/* extend.c X */
-int		 insert(int, int);
-int		 bindtokey(int, int);
-int		 localbind(int, int);
-int		 redefine_key(int, int);
-int		 unbindtokey(int, int);
-int		 localunbind(int, int);
-int		 extend(int, int);
-int		 evalexpr(int, int);
-int		 evalbuffer(int, int);
-int		 evalfile(int, int);
-int		 load(const char *);
-int		 excline(char *);
 
 /* help.c X */
 int		 desckey(int, int);

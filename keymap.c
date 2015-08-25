@@ -226,7 +226,7 @@ static PF metal[] = {
 	upperword,		/* u */
 	backpage,		/* v */
 	copyregion,		/* w */
-	extend,			/* x */
+	rescan,			/* x */
 	rescan,			/* y */
 	rescan,			/* z */
 	gotobop,		/* { */

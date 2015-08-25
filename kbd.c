@@ -319,6 +319,47 @@ negative_argument(int f, int n)
 }
 
 /*
+ * Insert a string, mainly for use from macros (created by selfinsert).
+ */
+/* ARGSUSED */
+int
+insert(int f, int n)
+{
+	char	 buf[128], *bufp, *cp;
+	int	 count, c;
+
+	if (inmacro) {
+		while (--n >= 0) {
+			for (count = 0; count < maclcur->l_used; count++) {
+				if ((((c = maclcur->l_text[count]) == '\n')
+				    ? lnewline() : linsert(1, c)) != TRUE)
+					return (FALSE);
+			}
+		}
+		maclcur = maclcur->l_fp;
+		return (TRUE);
+	}
+	if (n == 1)
+		/* CFINS means selfinsert can tack on the end */
+		thisflag |= CFINS;
+
+	if ((bufp = eread("Insert: ", buf, sizeof(buf), EFNEW)) == NULL)
+		return (ABORT);
+	else if (bufp[0] == '\0')
+		return (FALSE);
+	while (--n >= 0) {
+		cp = buf;
+		while (*cp) {
+			if (((*cp == '\n') ? lnewline() : linsert(1, *cp))
+			    != TRUE)
+				return (FALSE);
+			cp++;
+		}
+	}
+	return (TRUE);
+}
+
+/*
  * Insert a character.	While defining a macro, create a "LINE" containing
  * all inserted characters.
  */
