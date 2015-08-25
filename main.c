@@ -72,7 +72,6 @@ main(int argc, char **argv)
 	vtinit();		/* Virtual terminal.		*/
 	dirinit();		/* Get current directory.	*/
 	edinit(bp);		/* Buffers, windows.		*/
-	ttykeymapinit();	/* Symbols, bindings.		*/
 	bellinit();		/* Audible and visible bell.	*/
 
 	/*

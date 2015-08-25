@@ -589,10 +589,6 @@ int		 readpattern(char *);
 /* spawn.c X */
 int		 spawncli(int, int);
 
-/* ttykbd.c X */
-void		 ttykeymapinit(void);
-void		 ttykeymaptidy(void);
-
 /* match.c X */
 int		 showmatch(int, int);
 

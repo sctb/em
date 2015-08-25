@@ -150,10 +150,6 @@ ttreinit(void)
 void
 tttidy(void)
 {
-#ifdef	XKEYS
-	ttykeymaptidy();
-#endif /* XKEYS */
-
 	/* set the term back to normal mode */
 	if (exit_ca_mode)
 		putpad(exit_ca_mode, 1);

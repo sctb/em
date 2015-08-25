@@ -1,7 +1,7 @@
 /* This file is in the public domain. */
 
 /*
- *	Extended (M-X) commands, rebinding, and	startup file processing.
+ *	Extended (M-X) commands
  */
 #include "chrdef.h"
 #include "def.h"
@@ -13,13 +13,6 @@
 #include <limits.h>
 
 #include "macro.h"
-
-#ifdef	FKEYS
-#include "key.h"
-#ifndef	BINDKEY
-#define	BINDKEY			/* bindkey is used by FKEYS startup code */
-#endif /* !BINDKEY */
-#endif /* FKEYS */
 
 static int	 remap(KEYMAP *, int, PF, KEYMAP *);
 static KEYMAP	*reallocmap(KEYMAP *);
@@ -430,53 +423,6 @@ bindkey(KEYMAP **mapp, const char *fname, KCHAR *keys, int kcount)
 	(void)doscan(curmap, c = *keys, NULL);
 	return (remap(curmap, c, funct, pref_map));
 }
-
-#ifdef FKEYS
-/*
- * Wrapper for bindkey() that converts escapes.
- */
-int
-dobindkey(KEYMAP *map, const char *func, const char *str)
-{
-	int	 i;
-
-	for (i = 0; *str && i < MAXKEY; i++) {
-		/* XXX - convert numbers w/ strol()? */
-		if (*str == '^' && *(str + 1) !=  '\0') {
-			key.k_chars[i] = CCHR(toupper((unsigned char)*++str));
-		} else if (*str == '\\' && *(str + 1) != '\0') {
-			switch (*++str) {
-			case '^':
-				key.k_chars[i] = '^';
-				break;
-			case 't':
-			case 'T':
-				key.k_chars[i] = '\t';
-				break;
-			case 'n':
-			case 'N':
-				key.k_chars[i] = '\n';
-				break;
-			case 'r':
-			case 'R':
-				key.k_chars[i] = '\r';
-				break;
-			case 'e':
-			case 'E':
-				key.k_chars[i] = CCHR('[');
-				break;
-			case '\\':
-				key.k_chars[i] = '\\';
-				break;
-			}
-		} else
-			key.k_chars[i] = *str;
-		str++;
-	}
-	key.k_count = i;
-	return (bindkey(&map, func, key.k_chars, key.k_count));
-}
-#endif /* FKEYS */
 #endif /* BINDKEY */
 
 /*
@@ -692,9 +638,7 @@ load(const char *fname)
 }
 
 /*
- * excline - run a line from a load file or eval-expression.  If FKEYS is
- * defined, duplicate functionality of dobind so function key values don't
- * have to fit in type char.
+ * excline - run a line from a load file or eval-expression
  */
 int
 excline(char *line)
@@ -705,17 +649,7 @@ excline(char *line)
 	char	*funcp, *tmp;
 	char	*argp = NULL;
 	long	 nl;
-#ifdef	FKEYS
-	int	 bind;
-	KEYMAP	*curmap;
-#define BINDARG		0  /* this arg is key to bind (local/global set key) */
-#define	BINDNO		1  /* not binding or non-quoted BINDARG */
-#define BINDNEXT	2  /* next arg " (define-key) */
-#define BINDDO		3  /* already found key to bind */
-#define BINDEXT		1  /* space for trailing \0 */
-#else /* FKEYS */
 #define BINDEXT		0
-#endif /* FKEYS */
 
 	lp = NULL;
 
@@ -752,18 +686,6 @@ excline(char *line)
 		ewprintf("Unknown function: %s", funcp);
 		return (FALSE);
 	}
-#ifdef	FKEYS
-	if (fp == bindtokey || fp == unbindtokey) {
-		bind = BINDARG;
-		curmap = fundamental_map;
-	} else if (fp == localbind || fp == localunbind) {
-		bind = BINDARG;
-		curmap = curbp->b_modes[curbp->b_nmodes]->p_map;
-	} else if (fp == redefine_key)
-		bind = BINDNEXT;
-	else
-		bind = BINDNO;
-#endif /* FKEYS */
 	/* Pack away all the args now... */
 	if ((np = lalloc(0)) == FALSE)
 		return (FALSE);
@@ -782,28 +704,15 @@ excline(char *line)
 				goto cleanup;
 			}
 			bcopy(argp, ltext(lp), (int)(line - argp));
-#ifdef	FKEYS
-			/* don't count BINDEXT */
-			lp->l_used--;
-			if (bind == BINDARG)
-				bind = BINDNO;
-#endif /* FKEYS */
 		} else {
 			/* quoted strings are special */
 			++argp;
-#ifdef	FKEYS
-			if (bind != BINDARG) {
-#endif /* FKEYS */
 				lp = lalloc((int)(line - argp) + BINDEXT);
 				if (lp == NULL) {
 					status = FALSE;
 					goto cleanup;
 				}
 				lp->l_used = 0;
-#ifdef	FKEYS
-			} else
-				key.k_count = 0;
-#endif /* FKEYS */
 			while (*argp != '"' && *argp != '\0') {
 				if (*argp != '\\')
 					c = *argp++;
@@ -855,85 +764,26 @@ excline(char *line)
 							}
 						}
 						break;
-#ifdef	FKEYS
-					case 'f':
-					case 'F':
-						c = *++argp - '0';
-						if (ISDIGIT(argp[1])) {
-							c *= 10;
-							c += *++argp - '0';
-						}
-						c += KFIRST;
-						break;
-#endif /* FKEYS */
 					default:
 						c = CHARMASK(*argp);
 						break;
 					}
 					argp++;
 				}
-#ifdef	FKEYS
-				if (bind == BINDARG)
-					key.k_chars[key.k_count++] = c;
-				else
-#endif /* FKEYS */
 					lp->l_text[lp->l_used++] = c;
 			}
 			if (*line)
 				line++;
 		}
-#ifdef	FKEYS
-		switch (bind) {
-		case BINDARG:
-			bind = BINDDO;
-			break;
-		case BINDNEXT:
-			lp->l_text[lp->l_used] = '\0';
-			if ((curmap = name_map(lp->l_text)) == NULL) {
-				dobeep();
-				ewprintf("No such mode: %s", lp->l_text);
-				status = FALSE;
-				free(lp);
-				goto cleanup;
-			}
-			free(lp);
-			bind = BINDARG;
-			break;
-		default:
-#endif /* FKEYS */
 			lp->l_fp = np->l_fp;
 			lp->l_bp = np;
 			np->l_fp = lp;
 			np = lp;
-#ifdef	FKEYS
-		}
-#endif /* FKEYS */
 	}
-#ifdef	FKEYS
-	switch (bind) {
-	default:
-		dobeep();
-		ewprintf("Bad args to set key");
-		status = FALSE;
-		break;
-	case BINDDO:
-		if (fp != unbindtokey && fp != localunbind) {
-			lp->l_text[lp->l_used] = '\0';
-			status = bindkey(&curmap, lp->l_text, key.k_chars,
-			    key.k_count);
-		} else
-			status = bindkey(&curmap, NULL, key.k_chars,
-			    key.k_count);
-		break;
-	case BINDNO:
-#endif /* FKEYS */
 		inmacro = TRUE;
 		maclcur = maclcur->l_fp;
 		status = (*fp)(f, n);
 		inmacro = FALSE;
-#ifdef	FKEYS
-	}
-#endif /* FKEYS */
 cleanup:
 	lp = maclcur->l_fp;
 	while (lp != maclcur) {

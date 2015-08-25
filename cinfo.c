@@ -122,11 +122,6 @@ getkeyname(char *cp, size_t len, int k)
 		np = "DEL";
 		break;
 	default:
-#ifdef	FKEYS
-		if (k >= KFIRST && k <= KLAST &&
-		    (np = keystrings[k - KFIRST]) != NULL)
-			break;
-#endif
 		if (k > CCHR('?')) {
 			*cp++ = '0';
 			*cp++ = ((k >> 6) & 7) + '0';
