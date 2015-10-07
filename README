@@ -4,3 +4,15 @@ This is a fork of the mg editor from the OpenBSD sources. It has many
 features removed, mostly related to customization and specific editing
 modes. It should also build portably on systems with an ANSI C
 compiler.
+
+Dave Conroy wrote the original uemacs in 1985, and the README from mg
+notes the following other authors:
+
+	blarson@ecla.usc.edu		Bob Larson
+	mic@emx.utexas.edu		Mic Kaczmarczik
+	mwm@violet.berkeley.edu		Mike Meyer
+	sandra@cs.utah.edu		Sandra Loosemore
+	mp1u+@andrew.cmu.edu		Michael Portuesi
+	RCKG01M@CALSTATE.BITNET		Stephen Walton
+	hakanson@mist.cs.orst.edu	Marion Hakanson
+	rtech!daveb@sun.com		Dave Brower
