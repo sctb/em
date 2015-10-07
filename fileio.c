@@ -19,7 +19,6 @@
 #include <unistd.h>
 
 #include "kbd.h"
-#include "pathnames.h"
 
 /*
  * Open a file for reading.
