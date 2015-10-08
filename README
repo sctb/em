@@ -2,8 +2,7 @@ Em: An Emacs-style editor in the public domain
 
 This is a fork of the mg editor from the OpenBSD sources. It has many
 features removed, mostly related to customization and specific editing
-modes. It should also build portably on systems with an ANSI C
-compiler.
+modes.
 
 Dave Conroy wrote the original uemacs in 1985, and the README from mg
 notes the following other authors:
