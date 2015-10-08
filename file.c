@@ -287,7 +287,7 @@ insertfile(char *fname, char *newname, int replacebuf)
 
 	/* cheap */
 	bp = curbp;
-	if (newname != NULL) {
+	if (newname != NULL && newname != bp->b_fname) {
 		(void)strlcpy(bp->b_fname, newname, sizeof(bp->b_fname));
 		(void)xdirname(bp->b_cwd, newname, sizeof(bp->b_cwd));
 		(void)strlcat(bp->b_cwd, "/", sizeof(bp->b_cwd));
