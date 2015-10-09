@@ -520,7 +520,7 @@ gotoline(int f, int n)
 		if (bufp[0] == '\0')
 			return (ABORT);
 		n = (int)strtol(buf, &err, 0);
-		if (err) {
+		if (*err != '\0') {
 			dobeep();
 			ewprintf("Line number %s", err);
 			return (FALSE);

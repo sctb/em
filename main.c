@@ -91,7 +91,7 @@ main(int argc, char **argv)
 			char *errstr;
 
 			lval = strtol(&argv[i][1], &errstr, 0);
-			if (argv[i][1] == '\0' || errstr != NULL)
+			if (argv[i][1] == '\0' || *errstr != '\0')
 				goto notnum;
 			startrow = lval;
 		} else {

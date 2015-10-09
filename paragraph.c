@@ -346,7 +346,7 @@ setfillcol(int f, int n)
 		else if (rep[0] == '\0')
 			return (FALSE);
 		nfill = (int)strtol(rep, &es, 10);
-		if (es != NULL) {
+		if (*es != '\0') {
 			dobeep();
 			ewprintf("Invalid fill column: %s", rep);
 			return (FALSE);
