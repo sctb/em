@@ -199,7 +199,7 @@ static PF metami[] = {
 };
 
 static PF metasqf[] = {
-	NULL,			/* [ */
+	rescan,			/* [ */
 	delwhite,		/* \ */
 	rescan,			/* ] */
 	joinline,		/* ^ */
@@ -234,24 +234,9 @@ static PF metal[] = {
 	gotoeop			/* } */
 };
 
-static PF metasqlZ[] = {
-	rescan			/* Z */
-};
-
 static PF metatilde[] = {
 	notmodified,		/* ~ */
 	delbword		/* DEL */
-};
-
-struct KEYMAPE (1 + IMAPEXT) metasqlmap = {
-	1,
-	1 + IMAPEXT,
-	rescan,
-	{
-		{
-			'Z', 'Z', metasqlZ, NULL
-		}
-	}
 };
 
 struct KEYMAPE (8 + IMAPEXT) metamap = {
@@ -275,7 +260,7 @@ struct KEYMAPE (8 + IMAPEXT) metamap = {
 			'*', '>', metami, NULL
 		},
 		{
-			'[', 'f', metasqf, (KEYMAP *) &metasqlmap
+			'[', 'f', metasqf, NULL
 		},
 		{
 			'l', '}', metal, NULL
