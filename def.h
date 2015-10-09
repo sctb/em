@@ -577,9 +577,6 @@ int		 spawncli(int, int);
 /* match.c X */
 int		 showmatch(int, int);
 
-/* version.c X */
-int		 showversion(int, int);
-
 /* macro.c X */
 int		 definemacro(int, int);
 int		 finishmacro(int, int);
