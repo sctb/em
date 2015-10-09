@@ -290,7 +290,7 @@ static PF fund_at[] = {
 	setmark,		/* ^@ */
 	gotobol,		/* ^A */
 	backchar,		/* ^B */
-	NULL,			/* ^C */
+	rescan,			/* ^C */
 	forwdel,		/* ^D */
 	gotoeol,		/* ^E */
 	forwchar,		/* ^F */
