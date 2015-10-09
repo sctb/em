@@ -334,7 +334,7 @@ int
 setfillcol(int f, int n)
 {
 	char buf[32], *rep;
-	char *es;
+	char *end;
 	int nfill;
 
 	if ((f & FFARG) != 0) {
@@ -345,8 +345,8 @@ setfillcol(int f, int n)
 			return (ABORT);
 		else if (rep[0] == '\0')
 			return (FALSE);
-		nfill = (int)strtol(rep, &es, 10);
-		if (*es != '\0') {
+		nfill = (int)strtol(rep, &end, 10);
+		if (*end != '\0') {
 			dobeep();
 			ewprintf("Invalid fill column: %s", rep);
 			return (FALSE);

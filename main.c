@@ -88,10 +88,10 @@ main(int argc, char **argv)
 	for (nfiles = 0, i = 0; i < argc; i++) {
 		if (argv[i][0] == '+' && strlen(argv[i]) >= 2) {
 			long lval;
-			char *errstr;
+			char *end;
 
-			lval = strtol(&argv[i][1], &errstr, 0);
-			if (argv[i][1] == '\0' || *errstr != '\0')
+			lval = strtol(&argv[i][1], &end, 0);
+			if (argv[i][1] == '\0' || *end != '\0')
 				goto notnum;
 			startrow = lval;
 		} else {
