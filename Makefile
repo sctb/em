@@ -1,5 +1,5 @@
 CFLAGS+=-std=c89 -Wall
-LDFLAGS+=-lcurses
+LDFLAGS+=-ltermcap
 
 SRCS= basic.c bell.c buffer.c cinfo.c dir.c display.c echo.c file.c	\
 	fileio.c funmap.c help.c kbd.c keymap.c line.c macro.c		\
